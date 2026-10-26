@@ -1,0 +1,44 @@
+name: CI
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run check
+      - run: npm run audit:runtime
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t whatsapp-mcp:test .
+      - name: Verify non-root startup and persistent restart
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker run -d --name wa-mcp-ci --read-only --tmpfs /tmp --cap-drop ALL --security-opt no-new-privileges -p 127.0.0.1:8787:8787 whatsapp-mcp:test
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:8787/health; then break; fi
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:8787/health
+          test "$(docker exec wa-mcp-ci id -u)" = 1000
+          docker restart wa-mcp-ci
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:8787/health; then break; fi
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:8787/health
+      - if: always()
+        run: docker logs wa-mcp-ci; docker rm -fv wa-mcp-ci

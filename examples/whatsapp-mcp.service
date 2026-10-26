@@ -1,0 +1,28 @@
+[Unit]
+Description=WhatsApp MCP
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=whatsapp-mcp
+Group=whatsapp-mcp
+WorkingDirectory=/opt/whatsapp-mcp
+Environment=NODE_ENV=production
+Environment=WA_DATA_DIR=/var/lib/whatsapp-mcp
+Environment=WA_HOST=127.0.0.1
+Environment=WA_PORT=8787
+Environment=WA_PUBLIC_URL=https://whatsapp.example.com
+UMask=0077
+ExecStart=/usr/bin/node /opt/whatsapp-mcp/dist/cli.js serve
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=45
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/whatsapp-mcp
+
+[Install]
+WantedBy=multi-user.target

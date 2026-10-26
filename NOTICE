@@ -1,0 +1,22 @@
+WhatsApp MCP
+Copyright (C) 2026 KaizenTrick contributors
+Project source: https://github.com/kaizentrick/whatsapp-mcp
+Project license: GNU GPL version 3 only. See LICENSE.
+
+This is an independent implementation built around Baileys, not a fork of
+Evolution API. No Evolution API implementation is included.
+
+Important third-party components (their own licenses continue to apply):
+- @whiskeysockets/baileys: MIT, WhiskeySockets contributors.
+  https://github.com/WhiskeySockets/Baileys
+- libsignal: GPL-3.0, Signal/libsignal-node contributors.
+  https://github.com/WhiskeySockets/libsignal-node
+- @modelcontextprotocol/sdk: MIT, Model Context Protocol contributors.
+  https://github.com/modelcontextprotocol/typescript-sdk
+- whatsapp-rust-bridge: MIT, WhatsApp Rust contributors.
+  https://github.com/jlucaso1/whatsapp-rust-bridge
+
+The lockfile identifies all transitive versions; installed dependency directories
+contain their license texts. This list is not a replacement for those licenses.
+WhatsApp is a trademark of its respective owner. This project is not affiliated
+with or endorsed by WhatsApp or Meta.

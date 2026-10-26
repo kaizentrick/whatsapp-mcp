@@ -1,0 +1,44 @@
+{
+  "name": "@kaizentrick/whatsapp-mcp",
+  "version": "0.1.0",
+  "description": "Self-hosted WhatsApp sessions and tools over standard MCP. QR pairing, multiple accounts, no AI-provider dependency.",
+  "type": "module",
+  "private": true,
+  "license": "GPL-3.0-only",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "bin": {
+    "whatsapp-mcp": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cli.js serve",
+    "init": "node dist/cli.js init",
+    "stdio": "node dist/cli.js stdio",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "check": "tsc --noEmit",
+    "audit:runtime": "npm audit --omit=dev",
+    "format": "prettier --write src test scripts",
+    "smoke:qr": "npm run build && node scripts/smoke-qr.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kaizentrick/whatsapp-mcp.git"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "@whiskeysockets/baileys": "7.0.0-rc14",
+    "express": "5.2.1",
+    "pino": "10.4.0",
+    "qrcode": "1.5.4",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.6",
+    "@types/node": "24.10.1",
+    "@types/qrcode": "1.5.6",
+    "prettier": "3.9.10",
+    "typescript": "5.9.3"
+  }
+}

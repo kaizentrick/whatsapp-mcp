@@ -1,0 +1,5 @@
+# Replace with your domain, point its DNS to your server, and set WA_PUBLIC_URL
+# to this exact HTTPS origin in the service environment.
+whatsapp.example.com {
+    reverse_proxy 127.0.0.1:8787
+}

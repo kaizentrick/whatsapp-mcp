@@ -1,0 +1,24 @@
+services:
+  whatsapp-mcp:
+    build: .
+    image: whatsapp-mcp:local
+    init: true
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8787:8787"
+    environment:
+      WA_PUBLIC_URL: ${WA_PUBLIC_URL:-http://127.0.0.1:8787}
+      WA_MAX_MEDIA_BYTES: ${WA_MAX_MEDIA_BYTES:-5242880}
+    volumes:
+      - whatsapp-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    stop_grace_period: 45s
+
+volumes:
+  whatsapp-data:

@@ -1,0 +1,15 @@
+.git
+node_modules
+dist
+data
+coverage
+.env
+*.sqlite*
+*.log
+test
+
+*.token
+*.pem
+*.key
+.env.*
+*.tar*

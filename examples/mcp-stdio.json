@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "whatsapp": {
+      "command": "node",
+      "args": ["/absolute/path/to/whatsapp-mcp/dist/cli.js", "stdio"],
+      "env": {
+        "WA_SERVER_URL": "https://whatsapp.example.com",
+        "WA_CLIENT_TOKEN_FILE": "/private/path/to/client.token"
+      }
+    }
+  }
+}
